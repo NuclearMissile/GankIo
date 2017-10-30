@@ -52,6 +52,7 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
                 }
             }
         });
+
     }
 
     @Override
