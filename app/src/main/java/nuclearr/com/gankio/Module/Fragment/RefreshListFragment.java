@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -31,7 +32,7 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
 
     @Override
     protected void setUpView() {
-        mItems = new ArrayList();
+        mItems = new LinkedList();
         mRecyclerView = $(R.id.recycler_view);
         mRefreshLayout = $(R.id.refresh_layout);
         mLayoutManager = setLayoutManager();
