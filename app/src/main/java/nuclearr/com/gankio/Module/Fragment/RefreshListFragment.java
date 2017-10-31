@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -80,9 +79,11 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
         if (pageIndex == getInitPageIndex() && (items == null || items.size() <= 0)) {
             showMessage("No data.");
         } else if (pageIndex == getInitPageIndex()) {
+            showMessage("Now loading...");
             mItems.clear();
             mItems.addAll(items);
         } else if (items != null && items.size() > 0) {
+            showMessage("Loading more...");
             mItems.addAll(items);
         } else {
             mCurrentPageIndex--;

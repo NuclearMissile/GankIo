@@ -28,10 +28,9 @@ public final class GanDailyListViewBinder extends ItemViewBinder<GanDailyListIte
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull GanDailyListItem item) {
         boolean isToday = DateUtil.isToday(DateUtil.parseDate(item.getPublishDate()));
-        holder.imageView.setTag(R.id.image_id, item.getImageUrl());
-
+        // holder.imageView.setTag(R.id.image_id, item.getImageUrl());
+        holder.setIsRecyclable(false);
         ImageLoader.showImage(holder.imageView, item.getImageUrl());
-
         holder.imageView.setColorFilter(Color.parseColor("#5e000000"));
         holder.dateTextView.setText(isToday ? "#Today" : "#" + item.getPublishDate());
         holder.descTextView.setText(item.getTitle().replace("今日力推：", ""));

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.ArrayMap;
@@ -20,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import nuclearr.com.gankio.Module.Fragment.BaseFragment;
 import nuclearr.com.gankio.Module.Fragment.MainFragment;
 import nuclearr.com.gankio.Module.Fragment.RefreshListFragment;
 import nuclearr.com.gankio.R;
@@ -41,8 +41,7 @@ public final class MainActivity extends BaseActivity {
     private long lastBackPressed = 0;
     private int bottomNavIndex = 0;
 
-    private FragmentManager mFragmentManager;
-    private Fragment mCurrentFragment;
+    private BaseFragment mCurrentFragment;
     private ViewPager mViewPager;
     private BottomNavigationBar mBottomNavBar;
     private TabLayout mTabLayout;
@@ -87,8 +86,7 @@ public final class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar($(R.id.toolbar));
-        mFragmentManager = getSupportFragmentManager();
-        mPagerAdapter = new SectionsPagerAdapter(mFragmentManager);
+        mPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = $(R.id.container);
         mTabLayout = $(R.id.tabs);
@@ -119,20 +117,14 @@ public final class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             try {
                 mCurrentFragment = new MainFragment();
             } catch (Exception e) {
