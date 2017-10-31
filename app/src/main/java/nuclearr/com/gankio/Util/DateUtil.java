@@ -80,35 +80,33 @@ public final class DateUtil {
      * @return
      */
     public static String getFriendlyTime(String dateTime) {
-        Date time = parseDateTime(dateTime);
+        Date time = parseDateTime(dateTime.replace(":", "-"));
         if (time == null)
             return "Parse Error.";
-
-        String result = "";
+        String result;
         Calendar calendar = Calendar.getInstance();
         String today = formatDate(calendar.getTime());
-        String inputDay = formatDate(time);
 
-        if (today.equals(inputDay)) {
-            int hourDiff = (int) ((calendar.getTimeInMillis() - time.getTime()) / 3600000);
+        if (today.equals(formatDate(time))) {
+            long hourDiff = (calendar.getTimeInMillis() - time.getTime()) / 3600000;
             if (hourDiff == 0) {
-                result = Math.max((calendar.getTimeInMillis() - time.getTime()) / 60000, 1) + "min(s) ago";
+                result = Math.max((calendar.getTimeInMillis() - time.getTime()) / 60000, 1) + " min(s) ago";
             } else {
-                result = hourDiff + "hour(s) ago";
+                result = hourDiff + " hour(s) ago";
             }
             return result;
         }
 
-        int dayDiff = (int) (calendar.getTimeInMillis() - time.getTime()) / 86400000;
+        long dayDiff = (calendar.getTimeInMillis() - time.getTime()) / 86400000;
         if (dayDiff == 0) {
-            int hourDiff = (int) ((calendar.getTimeInMillis() - time.getTime()) / 3600000);
+            long hourDiff = (calendar.getTimeInMillis() - time.getTime()) / 3600000;
             if (hourDiff == 0) {
-                result = Math.max((calendar.getTimeInMillis() - time.getTime()) / 60000, 1) + "min(s) ago";
+                result = Math.max((calendar.getTimeInMillis() - time.getTime()) / 60000, 1) + " min(s) ago";
             } else {
-                result = hourDiff + "hour(s) ago";
+                result = hourDiff + " hour(s) ago";
             }
-        } else if (dayDiff <= 5) {
-            result = dayDiff + "days ago";
+        } else if (dayDiff <= 7) {
+            result = dayDiff + " days ago";
         } else {
             result = formatDate(time);
         }

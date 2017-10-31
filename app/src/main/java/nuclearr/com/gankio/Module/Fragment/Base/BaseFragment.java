@@ -1,4 +1,4 @@
-package nuclearr.com.gankio.Module.Fragment;
+package nuclearr.com.gankio.Module.Fragment.Base;
 
 import android.app.ProgressDialog;
 import android.content.Context;

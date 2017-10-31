@@ -1,4 +1,4 @@
-package nuclearr.com.gankio.Module.Fragment;
+package nuclearr.com.gankio.Module.Fragment.Base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +27,7 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadData(mCurrentPageIndex);
+        setUserVisibleHint(true);
     }
 
     @Override
@@ -37,7 +38,7 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
         mLayoutManager = setLayoutManager();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = setAdapter(new MultiTypeAdapter(mItems));
+        mAdapter = regAdapter(new MultiTypeAdapter(mItems));
         mRecyclerView.setAdapter(mAdapter);
         mCurrentPageIndex = getInitPageIndex();
 
@@ -60,11 +61,11 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
         return R.layout.refresh_list_fragment;
     }
 
-    protected abstract MultiTypeAdapter setAdapter(MultiTypeAdapter adapter);
+    protected abstract MultiTypeAdapter regAdapter(MultiTypeAdapter adapter);
 
     protected abstract RecyclerView.LayoutManager setLayoutManager();
 
-    // todo fix scroll
+    // todo fix scroll to top
     public boolean scrollToTop() {
         mRecyclerView.smoothScrollToPosition(0);
         return !mRecyclerView.canScrollVertically(-1);
@@ -79,11 +80,11 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
         if (pageIndex == getInitPageIndex() && (items == null || items.size() <= 0)) {
             showMessage("No data.");
         } else if (pageIndex == getInitPageIndex()) {
-            showMessage("Now loading...");
+            showMessage(mRefreshLayout.isRefreshing() ? "Refreshing..." : "Now loading...");
             mItems.clear();
             mItems.addAll(items);
         } else if (items != null && items.size() > 0) {
-            showMessage("Loading more...");
+            showMessage(mRefreshLayout.isRefreshing() ? "Refreshing..." : "Loading more...");
             mItems.addAll(items);
         } else {
             mCurrentPageIndex--;
@@ -121,12 +122,12 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
     }
 
     @Override
-    public void showMessage(String msg) {
-        ToastUtil.showToast(msg, Toast.LENGTH_SHORT);
+    public void showContent() {
+
     }
 
     @Override
-    public void showContent() {
-
+    public void showMessage(String msg) {
+        ToastUtil.showToast(msg, Toast.LENGTH_SHORT);
     }
 }

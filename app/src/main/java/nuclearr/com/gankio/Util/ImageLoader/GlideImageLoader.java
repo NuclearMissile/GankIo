@@ -40,7 +40,8 @@ final class GlideImageLoader {
                 .into(request.getImageView());
     }
 
-    /*private void loadNet(Context context, ImageRequest request) {
+    // todo fix image load order problem
+    private void loadNet(Context context, ImageRequest request) {
         GlideApp.with(context)
                 .load(request.getUrl())
                 .placeholder(request.getPlaceHolder())
@@ -48,18 +49,6 @@ final class GlideImageLoader {
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .transition(DrawableTransitionOptions.withCrossFade(300))
                 .priority(Priority.IMMEDIATE)
-                .into(request.getImageView());
-    }*/
-
-    // todo fix image load order problem
-    private void loadNet(Context context, ImageRequest request) {
-        GlideApp.with(context)
-                .load(request.getUrl())
-                .placeholder(request.getPlaceHolder())
-                .error(request.getError())
-                .priority(Priority.IMMEDIATE)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .transition(DrawableTransitionOptions.withCrossFade(300))
                 .into(new SimpleTarget<Drawable>() {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
@@ -67,4 +56,17 @@ final class GlideImageLoader {
                     }
                 });
     }
+
+/*    private void loadNet(Context context, ImageRequest request) {
+        GlideApp.with(context)
+                .asBitmap()
+                .load(request.getUrl())
+                .placeholder(request.getPlaceHolder())
+                .error(request.getError())
+                .priority(Priority.IMMEDIATE)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .transition(BitmapTransitionOptions.withCrossFade(300))
+                .into(request.getImageView());
+    }*/
+
 }

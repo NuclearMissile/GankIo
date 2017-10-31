@@ -1,4 +1,4 @@
-package nuclearr.com.gankio.Module.ViewBinder;
+package nuclearr.com.gankio.Module.Fragment.ViewBinder;
 
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
@@ -13,29 +13,30 @@ import android.widget.TextView;
 
 import me.drakeet.multitype.ItemViewBinder;
 import nuclearr.com.gankio.Bean.GanDailyListItem;
+import nuclearr.com.gankio.Constant;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.DateUtil;
 import nuclearr.com.gankio.Util.ImageLoader.ImageLoader;
 
-public final class GanDailyListViewBinder extends ItemViewBinder<GanDailyListItem, GanDailyListViewBinder.ViewHolder> {
+public final class GanDailyViewBinder extends ItemViewBinder<GanDailyListItem, GanDailyViewBinder.ViewHolder> {
 
     @NonNull
     @Override
-    protected GanDailyListViewBinder.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+    protected GanDailyViewBinder.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         return new ViewHolder(inflater.inflate(R.layout.daily_list_item, parent, false));
     }
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull GanDailyListItem item) {
         boolean isToday = DateUtil.isToday(DateUtil.parseDate(item.getPublishDate()));
-        // holder.imageView.setTag(R.id.image_id, item.getImageUrl());
-        holder.setIsRecyclable(false);
-        ImageLoader.showImage(holder.imageView, item.getImageUrl());
+        // holder.setIsRecyclable(false);
+        ImageLoader.showImage(holder.imageView, item.getImageUrl() + Constant.IMAGE_QUALITY_REQ_STRING);
+        // holder.imageView.setTag(R.id.image_id, item.getImageUrl() + Constant.IMAGE_QUALITY_REQ_STRING);
         holder.imageView.setColorFilter(Color.parseColor("#5e000000"));
         holder.dateTextView.setText(isToday ? "#Today" : "#" + item.getPublishDate());
         holder.descTextView.setText(item.getTitle().replace("今日力推：", ""));
         holder.itemView.setOnClickListener(v -> {
-            // todo->start new activity
+            // todo start new activity
         });
         holder.itemView.setOnTouchListener(new OnTapListener(holder));
     }

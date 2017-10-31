@@ -1,4 +1,4 @@
-package nuclearr.com.gankio.Module.Fragment;
+package nuclearr.com.gankio.Module.Fragment.Base;
 
 /**
  * Created by torri on 2017/10/19.

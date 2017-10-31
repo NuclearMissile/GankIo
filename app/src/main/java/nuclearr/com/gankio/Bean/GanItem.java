@@ -1,13 +1,26 @@
 package nuclearr.com.gankio.Bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.jetbrains.annotations.Contract;
 
-import java.io.Serializable;
 import java.util.List;
 
 
-public final class GanItem implements Serializable {
+public final class GanItem implements Parcelable {
 
+    public static final Creator<GanItem> CREATOR = new Creator<GanItem>() {
+        @Override
+        public GanItem createFromParcel(Parcel in) {
+            return new GanItem(in);
+        }
+
+        @Override
+        public GanItem[] newArray(int size) {
+            return new GanItem[size];
+        }
+    };
     private String _id;
     private String createdAt;
     private String desc;
@@ -18,6 +31,42 @@ public final class GanItem implements Serializable {
     private boolean used;
     private String who;
     private List<String> images;
+
+    private GanItem(Parcel in) {
+        _id = in.readString();
+        createdAt = in.readString();
+        desc = in.readString();
+        publishedAt = in.readString();
+        source = in.readString();
+        type = in.readString();
+        url = in.readString();
+        used = in.readByte() != 0;
+        who = in.readString();
+        images = in.createStringArrayList();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id);
+        dest.writeString(createdAt);
+        dest.writeString(desc);
+        dest.writeString(publishedAt);
+        dest.writeString(source);
+        dest.writeString(type);
+        dest.writeString(url);
+        dest.writeBooleanArray(new boolean[]{used});
+        dest.writeString(who);
+        dest.writeStringArray((String[]) images.toArray());
+    }
+
+    public String getPublishDate() {
+        return publishedAt.substring(0, publishedAt.indexOf("T"));
+    }
 
     @Contract(pure = true)
     public String get_id() {
@@ -108,4 +157,5 @@ public final class GanItem implements Serializable {
     public void setImages(List<String> images) {
         this.images = images;
     }
+
 }

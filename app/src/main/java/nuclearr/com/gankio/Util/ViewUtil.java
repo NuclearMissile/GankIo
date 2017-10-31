@@ -7,11 +7,7 @@ import android.util.TypedValue;
 
 import java.util.InputMismatchException;
 
-import nuclearr.com.gankio.Module.Fragment.BaseFragment;
-
-/**
- * Created by torri on 2017/10/24.
- */
+import nuclearr.com.gankio.Module.Fragment.Base.BaseFragment;
 
 public final class ViewUtil {
     private static final String TAG = "ViewUtil";
