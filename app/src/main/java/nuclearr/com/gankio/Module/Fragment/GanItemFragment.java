@@ -20,9 +20,8 @@ import nuclearr.com.gankio.Util.RxUtil;
 public final class GanItemFragment extends RefreshListFragment {
 
     @Override
-    protected MultiTypeAdapter regAdapter(MultiTypeAdapter adapter) {
+    protected void regAdapter(MultiTypeAdapter adapter) {
         adapter.register(GanItem.class, new GanItemViewBinder());
-        return adapter;
     }
 
     @Override

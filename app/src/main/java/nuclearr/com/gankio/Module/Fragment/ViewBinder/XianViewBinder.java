@@ -5,20 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.drakeet.multitype.ItemViewBinder;
 import nuclearr.com.gankio.Bean.XianItem;
+import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
+import nuclearr.com.gankio.Util.CustomTabsUtil;
 import nuclearr.com.gankio.Util.ImageLoader.ImageLoader;
 
-/**
- * Created by torri on 2017/11/1.
- */
-
-public class XianViewBinder extends ItemViewBinder<XianItem, XianViewBinder.ViewHolder> {
+public final class XianViewBinder extends ItemViewBinder<XianItem, XianViewBinder.ViewHolder> {
     @NonNull
     @Override
     protected XianViewBinder.ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
@@ -33,7 +30,7 @@ public class XianViewBinder extends ItemViewBinder<XianItem, XianViewBinder.View
         ImageLoader.showImage(holder.avatar, item.getSourceAvatar());
 
         holder.itemView.setOnClickListener(v -> {
-            // todo
+            CustomTabsUtil.openUrl(MainActivity.getInstance(), item.getUrl());
         });
     }
 

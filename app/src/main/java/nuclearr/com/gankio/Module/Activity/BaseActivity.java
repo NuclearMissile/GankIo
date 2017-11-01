@@ -1,7 +1,6 @@
 package nuclearr.com.gankio.Module.Activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,9 +12,13 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import java.util.LinkedList;
 
 public abstract class BaseActivity extends RxAppCompatActivity {
-
     private static final String TAG = "BaseActivity";
+    private static BaseActivity instance;
     private static LinkedList<Activity> activities = new LinkedList<>();
+
+    public static BaseActivity getInstance() {
+        return instance;
+    }
 
     protected static void addActivity(Activity activity) {
         activities.add(activity);
@@ -40,6 +43,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         Log.d(TAG, "This is " + getClass().getSimpleName());
         addActivity(this);
         setContentView(setContentResID());
+        instance = this;
     }
 
     protected abstract int setContentResID();
@@ -47,16 +51,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @SuppressWarnings("unchecked")
     protected <T extends View> T $(int resID) {
         return (T) super.findViewById(resID);
-    }
-
-    protected void startActivityWithoutExtra(Class<?> cls) {
-        startActivity(new Intent(this, cls));
-    }
-
-    protected void startActivityWithExtra(Class<?> cls, Bundle bundle) {
-        Intent intent = new Intent(this, cls);
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 
     @Override

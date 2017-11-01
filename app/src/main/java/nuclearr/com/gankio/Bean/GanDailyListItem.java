@@ -6,7 +6,7 @@ import org.jsoup.Jsoup;
  * Created by torri on 2017/10/26.
  */
 
-public class GanDailyListItem {
+public final class GanDailyListItem {
     private String _id;
     private String content;
     private String created_at;

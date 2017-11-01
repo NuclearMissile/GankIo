@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import me.drakeet.multitype.ItemViewBinder;
+import nuclearr.com.gankio.BaseApplication;
 import nuclearr.com.gankio.Bean.GanItem;
+import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
+import nuclearr.com.gankio.Util.CustomTabsUtil;
 import nuclearr.com.gankio.Util.DateUtil;
 
 public final class GanItemViewBinder extends ItemViewBinder<GanItem, GanItemViewBinder.ViewHolder> {
@@ -28,7 +31,7 @@ public final class GanItemViewBinder extends ItemViewBinder<GanItem, GanItemView
         holder.time.setText(DateUtil.getFriendlyTime(publishTime));
         holder.who.setText(item.getWho());
         holder.itemView.setOnClickListener(v -> {
-            // todo
+            CustomTabsUtil.openUrl(MainActivity.getInstance(), item.getUrl());
         });
     }
 

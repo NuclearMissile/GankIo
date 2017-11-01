@@ -11,7 +11,7 @@ public interface IListView {
 
     void loadMore();
 
-    void onError(Exception e);
+    void onException(Exception e);
 
     void showLoading();
 

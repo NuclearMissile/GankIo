@@ -38,7 +38,8 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
         mLayoutManager = setLayoutManager();
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = regAdapter(new MultiTypeAdapter(mItems));
+        mAdapter = new MultiTypeAdapter(mItems);
+        regAdapter(mAdapter);
         mRecyclerView.setAdapter(mAdapter);
         mCurrentPageIndex = getInitPageIndex();
 
@@ -53,15 +54,14 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
                 }
             }
         });
-
     }
 
     @Override
-    protected int setLayoutResID() {
+    protected final int setLayoutResID() {
         return R.layout.refresh_list_fragment;
     }
 
-    protected abstract MultiTypeAdapter regAdapter(MultiTypeAdapter adapter);
+    protected abstract void regAdapter(MultiTypeAdapter adapter);
 
     protected abstract RecyclerView.LayoutManager setLayoutManager();
 
@@ -112,8 +112,9 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
     }
 
     @Override
-    public void onError(Exception e) {
-
+    public void onException(Exception e) {
+        showMessage(e.getMessage());
+        e.printStackTrace();
     }
 
     @Override

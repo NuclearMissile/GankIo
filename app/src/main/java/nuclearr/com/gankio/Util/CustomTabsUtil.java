@@ -14,7 +14,8 @@ import nuclearr.com.gankio.R;
 public final class CustomTabsUtil {
     public static void openUrl(Context context, String url) {
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary));
-        builder.build().launchUrl(context, Uri.parse(url));
+        builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                .build()
+                .launchUrl(context, Uri.parse(url));
     }
 }

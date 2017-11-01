@@ -1,6 +1,7 @@
 package nuclearr.com.gankio.Module.Fragment.ViewBinder;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import me.drakeet.multitype.ItemViewBinder;
 import nuclearr.com.gankio.Bean.GanDailyListItem;
 import nuclearr.com.gankio.Constant;
+import nuclearr.com.gankio.Module.Activity.GanDailyDetailActivity;
+import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.DateUtil;
 import nuclearr.com.gankio.Util.ImageLoader.ImageLoader;
@@ -29,14 +32,21 @@ public final class GanDailyViewBinder extends ItemViewBinder<GanDailyListItem, G
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull GanDailyListItem item) {
         boolean isToday = DateUtil.isToday(DateUtil.parseDate(item.getPublishDate()));
-        // holder.setIsRecyclable(false);
+
+        // todo fix view holder reuse problem
+        holder.setIsRecyclable(false);
         ImageLoader.showImage(holder.imageView, item.getImageUrl() + Constant.IMAGE_QUALITY_REQ_STRING);
         // holder.imageView.setTag(R.id.image_id, item.getImageUrl() + Constant.IMAGE_QUALITY_REQ_STRING);
+
         holder.imageView.setColorFilter(Color.parseColor("#5e000000"));
         holder.dateTextView.setText(isToday ? "#Today" : "#" + item.getPublishDate());
         holder.descTextView.setText(item.getTitle().replace("今日力推：", ""));
         holder.itemView.setOnClickListener(v -> {
-            // todo start new activity
+            Intent intent = new Intent(MainActivity.getInstance(), GanDailyDetailActivity.class);
+            intent.putExtra("date", item.getPublishDate().replace("-", "/"));
+            intent.putExtra("image", item.getImageUrl());
+            intent.putExtra("title", item.getTitle().replace("今日力推：", ""));
+            MainActivity.getInstance().startActivity(intent);
         });
         holder.itemView.setOnTouchListener(new OnTapListener(holder));
     }

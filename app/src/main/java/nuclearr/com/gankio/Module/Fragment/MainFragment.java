@@ -19,9 +19,8 @@ import nuclearr.com.gankio.Util.RxUtil;
 public final class MainFragment extends RefreshListFragment {
 
     @Override
-    protected MultiTypeAdapter regAdapter(MultiTypeAdapter adapter) {
+    protected void regAdapter(MultiTypeAdapter adapter) {
         adapter.register(GanDailyListItem.class, new GanDailyViewBinder());
-        return adapter;
     }
 
     @Override

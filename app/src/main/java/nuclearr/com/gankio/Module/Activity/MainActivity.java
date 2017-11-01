@@ -29,10 +29,9 @@ import nuclearr.com.gankio.Util.LogUtil;
 import nuclearr.com.gankio.Util.ToastUtil;
 
 public final class MainActivity extends BaseActivity {
-
     private final static Map<Integer, List<String>> BOTTOM_NAV_MAP = new ArrayMap<>();
-    private final static Map<String, String> CATEGORY_MAP = new ArrayMap<>();
     private final static String TAG = "MainActivity";
+
 
     static {
         BOTTOM_NAV_MAP.put(0, Arrays.asList("Daily", "Android", "iOS", "Frontend", "Extend", "Video", "Recommend"));
@@ -115,7 +114,6 @@ public final class MainActivity extends BaseActivity {
                 mTabLayout.removeAllTabs();
                 mPagerAdapter.notifyDataSetChanged();
                 BOTTOM_NAV_MAP.get(position).forEach(s -> mTabLayout.addTab(mTabLayout.newTab().setText(s)));
-                mPagerAdapter.notifyDataSetChanged();
                 mViewPager.setAdapter(mPagerAdapter);
             }
         });

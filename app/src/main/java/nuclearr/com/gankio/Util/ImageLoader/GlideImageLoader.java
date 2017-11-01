@@ -59,13 +59,12 @@ final class GlideImageLoader {
 
 /*    private void loadNet(Context context, ImageRequest request) {
         GlideApp.with(context)
-                .asBitmap()
                 .load(request.getUrl())
                 .placeholder(request.getPlaceHolder())
                 .error(request.getError())
                 .priority(Priority.IMMEDIATE)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .transition(BitmapTransitionOptions.withCrossFade(300))
+                .transition(DrawableTransitionOptions.withCrossFade(300))
                 .into(request.getImageView());
     }*/
 
