@@ -9,7 +9,7 @@ import nuclearr.com.gankio.Util.LogUtil;
 import nuclearr.com.gankio.Util.RxUtil;
 
 
-public final class JiandanService extends BaseJsoupService {
+public class JiandanService extends BaseJsoupService {
 
     private static final String TAG = "JiandanService";
     private static final String BASE_URL = "http://jandan.net/ooxx/";

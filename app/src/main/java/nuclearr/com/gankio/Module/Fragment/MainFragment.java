@@ -8,6 +8,7 @@ import java.util.List;
 
 import me.drakeet.multitype.MultiTypeAdapter;
 import nuclearr.com.gankio.Bean.GanDailyListItem;
+import nuclearr.com.gankio.Constant;
 import nuclearr.com.gankio.Module.Fragment.Base.RefreshListFragment;
 import nuclearr.com.gankio.Module.Fragment.ViewBinder.GanDailyViewBinder;
 import nuclearr.com.gankio.Network.Api.IGankService;
@@ -30,10 +31,9 @@ public final class MainFragment extends RefreshListFragment {
 
     @Override
     public void loadData(final int pageIndex) {
-        final List data = new ArrayList(10);
         ServiceFactory.getInstance()
                 .createService(IGankService.class)
-                .getRecentlyList(pageIndex)
+                .getRecentlyList(pageIndex, Constant.PAGE_SIZE)
                 .compose(this.bindToLifecycle())
                 .compose(RxUtil.defaultSchedulers_single())
                 .subscribe(new HttpResultSub<List<GanDailyListItem>>() {
@@ -44,8 +44,7 @@ public final class MainFragment extends RefreshListFragment {
 
                     @Override
                     public void _onSuccess(List<GanDailyListItem> result) {
-                        data.addAll(result);
-                        onDataReceived(pageIndex, data);
+                        onDataReceived(pageIndex, result);
                     }
                 });
     }

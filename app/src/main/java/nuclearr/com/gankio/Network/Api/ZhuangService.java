@@ -7,7 +7,7 @@ import io.reactivex.Single;
 import nuclearr.com.gankio.Bean.ZhuangItem;
 
 
-public final class ZhuangService extends BaseJsoupService {
+public class ZhuangService extends BaseJsoupService {
 
     private final String BASE_URL = "https://www.zhuangbi.info/hot/";
 

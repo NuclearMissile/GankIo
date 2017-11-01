@@ -12,7 +12,7 @@ import retrofit2.http.Url;
 
 public interface IDefaultService {
 
-    String BASE_URL = "Dummy";
+    String BASE_URL = "http://www.example.com/";
 
     @GET
     Single<ResponseBody> loadString(@Url String url);

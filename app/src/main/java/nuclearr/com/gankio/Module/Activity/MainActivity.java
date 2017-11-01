@@ -23,6 +23,7 @@ import nuclearr.com.gankio.Module.Fragment.Base.BaseFragment;
 import nuclearr.com.gankio.Module.Fragment.Base.RefreshListFragment;
 import nuclearr.com.gankio.Module.Fragment.GanItemFragment;
 import nuclearr.com.gankio.Module.Fragment.MainFragment;
+import nuclearr.com.gankio.Module.Fragment.XianFragment;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.LogUtil;
 import nuclearr.com.gankio.Util.ToastUtil;
@@ -114,6 +115,7 @@ public final class MainActivity extends BaseActivity {
                 mTabLayout.removeAllTabs();
                 mPagerAdapter.notifyDataSetChanged();
                 BOTTOM_NAV_MAP.get(position).forEach(s -> mTabLayout.addTab(mTabLayout.newTab().setText(s)));
+                mPagerAdapter.notifyDataSetChanged();
                 mViewPager.setAdapter(mPagerAdapter);
             }
         });
@@ -136,10 +138,10 @@ public final class MainActivity extends BaseActivity {
             try {
                 switch (bottomNavIndex) {
                     case 0:
-                        if (position == 0)
-                            mCurrentFragment = new MainFragment();
-                        else
-                            mCurrentFragment = new GanItemFragment();
+                        mCurrentFragment = position == 0 ? new MainFragment() : new GanItemFragment();
+                        break;
+                    case 1:
+                        mCurrentFragment = new XianFragment();
                         break;
                     default:
                         mCurrentFragment = new MainFragment();

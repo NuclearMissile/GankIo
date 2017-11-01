@@ -20,23 +20,23 @@ public interface IGankService {
     Single<HttpResult<List<String>>>
     getAvaliableDays();
 
-    @GET("data/{category}/10/{pageIndex}")
+    @GET("data/{category}/{pageSize}/{pageIndex}")
     Single<HttpResult<List<GanItem>>>
-    getGanItemByCat(@Path("category") String category, @Path("pageIndex") int pagIndex);
+    getGanItemByCat(@Path("category") String category, @Path("pageIndex") int pagIndex, @Path("pageSize") int pageSize);
 
     @GET("day/{date}")
     Single<HttpResult<GanDailyItem>>
     getGanDailyByDate(@Path("date") String date);
 
-    @GET("search/query/{keyword}/category/{category}/count/10/page/{pageIndex}")
+    @GET("search/query/{keyword}/category/{category}/count/{pageSize}/page/{pageIndex}")
     Single<HttpResult<List<SearchResult>>>
-    getSearchResult(@Path("category") String category, @Path("keyword") String keyword, @Path("pageIndex") int pageIndex);
+    getSearchResult(@Path("category") String category, @Path("keyword") String keyword, @Path("pageIndex") int pageIndex, @Path("pageSize") int pageSize);
 
-    @GET("random/data/{category}/10")
+    @GET("random/data/{category}/{pageSize}")
     Single<HttpResult<List<GanItem>>>
-    getRandomGanItem(@Path("category") String category);
+    getRandomGanItem(@Path("category") String category, @Path("pageSize") int pageSize);
 
-    @GET("history/content/10/{pageIndex}")
+    @GET("history/content/{pageSize}/{pageIndex}")
     Single<HttpResult<List<GanDailyListItem>>>
-    getRecentlyList(@Path("pageIndex") int pageIndex);
+    getRecentlyList(@Path("pageIndex") int pageIndex, @Path("pageSize") int pageSize);
 }

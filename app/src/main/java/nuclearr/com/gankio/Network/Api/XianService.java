@@ -1,19 +1,14 @@
 package nuclearr.com.gankio.Network.Api;
 
-import org.jetbrains.annotations.NotNull;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Single;
 import nuclearr.com.gankio.Bean.XianCategory;
 import nuclearr.com.gankio.Bean.XianItem;
-import nuclearr.com.gankio.Network.ServiceFactory;
 
 
-public final class XianService extends BaseJsoupService {
+public class XianService extends BaseJsoupService {
 
     private final static String BASE_URL = "http://gank.io/xiandu/";
 
@@ -32,9 +27,7 @@ public final class XianService extends BaseJsoupService {
     }
 
     public static Single<List<XianItem>> getItems(String category, int pageIndex) {
-        if ("xiandu".equals(category))
-            category = "wow";
-        final String requestUrl = BASE_URL + "/" + category + "/" + "page" + pageIndex;
+        final String requestUrl = BASE_URL + category + "/page/" + pageIndex;
         return getDocumentObservable(requestUrl).map(document -> {
             List<XianItem> list = new LinkedList<>();
             document.body().getElementsByClass("xiandu_item").forEach(element -> {
