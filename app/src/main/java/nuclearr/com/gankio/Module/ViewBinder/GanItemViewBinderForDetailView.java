@@ -1,4 +1,4 @@
-package nuclearr.com.gankio.Module.Fragment.ViewBinder;
+package nuclearr.com.gankio.Module.ViewBinder;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,18 +8,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import me.drakeet.multitype.ItemViewBinder;
-import nuclearr.com.gankio.BaseApplication;
 import nuclearr.com.gankio.Bean.GanItem;
-import nuclearr.com.gankio.Module.Activity.MainActivity;
+import nuclearr.com.gankio.Module.Activity.BaseActivity;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.CustomTabsUtil;
 import nuclearr.com.gankio.Util.DateUtil;
 
-public final class GanItemViewBinder extends ItemViewBinder<GanItem, GanItemViewBinder.ViewHolder> {
+public final class GanItemViewBinderForDetailView extends ItemViewBinder<GanItem, GanItemViewBinderForDetailView.ViewHolder> {
     @NonNull
     @Override
     protected ViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
-        return new ViewHolder(inflater.inflate(R.layout.gan_item, parent, false));
+        return new ViewHolder(inflater.inflate(R.layout.gan_item_for_daily_detail, parent, false));
     }
 
     @Override
@@ -31,7 +30,7 @@ public final class GanItemViewBinder extends ItemViewBinder<GanItem, GanItemView
         holder.time.setText(DateUtil.getFriendlyTime(publishTime));
         holder.who.setText(item.getWho());
         holder.itemView.setOnClickListener(v -> {
-            CustomTabsUtil.openUrl(MainActivity.getInstance(), item.getUrl());
+            CustomTabsUtil.openUrl(BaseActivity.getInstance(), item.getUrl());
         });
     }
 
@@ -42,9 +41,9 @@ public final class GanItemViewBinder extends ItemViewBinder<GanItem, GanItemView
 
         ViewHolder(View itemView) {
             super(itemView);
-            who = itemView.findViewById(R.id.gan_item_who);
-            title = itemView.findViewById(R.id.gan_item_title);
-            time = itemView.findViewById(R.id.gan_item_time);
+            who = itemView.findViewById(R.id.gan_item_for_daily_detail_who);
+            title = itemView.findViewById(R.id.gan_item_for_daily_detail_title);
+            time = itemView.findViewById(R.id.gan_item_for_daily_detail_time);
         }
     }
 }

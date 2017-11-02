@@ -3,7 +3,7 @@ package nuclearr.com.gankio.Network.Api;
 import java.util.List;
 
 import io.reactivex.Single;
-import nuclearr.com.gankio.Bean.GanDailyItem;
+import nuclearr.com.gankio.Bean.GanDailyDetailItem;
 import nuclearr.com.gankio.Bean.GanDailyListItem;
 import nuclearr.com.gankio.Bean.GanItem;
 import nuclearr.com.gankio.Bean.SearchResult;
@@ -25,7 +25,7 @@ public interface IGankService {
     getGanItemByCat(@Path("category") String category, @Path("pageIndex") int pagIndex, @Path("pageSize") int pageSize);
 
     @GET("day/{date}")
-    Single<HttpResult<GanDailyItem>>
+    Single<HttpResult<GanDailyDetailItem>>
     getGanDailyByDate(@Path("date") String date);
 
     @GET("search/query/{keyword}/category/{category}/count/{pageSize}/page/{pageIndex}")

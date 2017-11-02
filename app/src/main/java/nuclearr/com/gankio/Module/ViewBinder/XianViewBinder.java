@@ -1,4 +1,4 @@
-package nuclearr.com.gankio.Module.Fragment.ViewBinder;
+package nuclearr.com.gankio.Module.ViewBinder;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.drakeet.multitype.ItemViewBinder;
 import nuclearr.com.gankio.Bean.XianItem;
+import nuclearr.com.gankio.Module.Activity.BaseActivity;
 import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.CustomTabsUtil;
@@ -30,7 +31,7 @@ public final class XianViewBinder extends ItemViewBinder<XianItem, XianViewBinde
         ImageLoader.showImage(holder.avatar, item.getSourceAvatar());
 
         holder.itemView.setOnClickListener(v -> {
-            CustomTabsUtil.openUrl(MainActivity.getInstance(), item.getUrl());
+            CustomTabsUtil.openUrl(BaseActivity.getInstance(), item.getUrl());
         });
     }
 

@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Contract;
 
 import java.util.List;
 
-public final class GanDailyItem {
+public final class GanDailyDetailItem {
 
     private List<GanItem> Android;
     private List<GanItem> iOS;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/gan_item_for_daily_detail_title"
+            style="@style/ListItem.Title"
+            android:layout_marginBottom="10dp"
+            android:maxLines="1"
+            android:text="Test" />
+
+        <TextView
+            android:id="@+id/gan_item_for_daily_detail_who"
+            style="@style/ListItem.Source"
+            android:layout_below="@id/gan_item_for_daily_detail_title"
+            android:maxLines="1"
+            android:text="Test" />
+
+        <TextView
+            android:id="@+id/gan_item_for_daily_detail_time"
+            style="@style/ListItem.Time"
+            android:layout_alignBaseline="@id/gan_item_for_daily_detail_who"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:maxLines="1"
+            android:text="Test" />
+
+    </RelativeLayout>
+
+</FrameLayout>

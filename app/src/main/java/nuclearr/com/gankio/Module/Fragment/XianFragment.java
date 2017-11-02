@@ -11,7 +11,7 @@ import io.reactivex.disposables.Disposable;
 import me.drakeet.multitype.MultiTypeAdapter;
 import nuclearr.com.gankio.Bean.XianItem;
 import nuclearr.com.gankio.Module.Fragment.Base.RefreshListFragment;
-import nuclearr.com.gankio.Module.Fragment.ViewBinder.XianViewBinder;
+import nuclearr.com.gankio.Module.ViewBinder.XianViewBinder;
 import nuclearr.com.gankio.Network.Api.XianService;
 import nuclearr.com.gankio.Util.RxUtil;
 

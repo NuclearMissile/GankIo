@@ -80,11 +80,11 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
         if (pageIndex == getInitPageIndex() && (items == null || items.size() <= 0)) {
             showMessage("No data.");
         } else if (pageIndex == getInitPageIndex()) {
-            showMessage(mRefreshLayout.isRefreshing() ? "Refreshing..." : "Now loading...");
+            // showMessage(mRefreshLayout.isRefreshing() ? "Refreshing..." : "Now loading...");
             mItems.clear();
             mItems.addAll(items);
         } else if (items != null && items.size() > 0) {
-            showMessage(mRefreshLayout.isRefreshing() ? "Refreshing..." : "Loading more...");
+            // showMessage(mRefreshLayout.isRefreshing() ? "Refreshing..." : "Loading more...");
             mItems.addAll(items);
         } else {
             mCurrentPageIndex--;

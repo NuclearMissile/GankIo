@@ -1,4 +1,4 @@
-package nuclearr.com.gankio.Module.Fragment.ViewBinder;
+package nuclearr.com.gankio.Module.ViewBinder;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import me.drakeet.multitype.ItemViewBinder;
 import nuclearr.com.gankio.Bean.GanDailyListItem;
 import nuclearr.com.gankio.Constant;
+import nuclearr.com.gankio.Module.Activity.BaseActivity;
 import nuclearr.com.gankio.Module.Activity.GanDailyDetailActivity;
 import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
@@ -42,11 +43,11 @@ public final class GanDailyViewBinder extends ItemViewBinder<GanDailyListItem, G
         holder.dateTextView.setText(isToday ? "#Today" : "#" + item.getPublishDate());
         holder.descTextView.setText(item.getTitle().replace("今日力推：", ""));
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.getInstance(), GanDailyDetailActivity.class);
+            Intent intent = new Intent(BaseActivity.getInstance(), GanDailyDetailActivity.class);
             intent.putExtra("date", item.getPublishDate().replace("-", "/"));
             intent.putExtra("image", item.getImageUrl());
             intent.putExtra("title", item.getTitle().replace("今日力推：", ""));
-            MainActivity.getInstance().startActivity(intent);
+            BaseActivity.getInstance().startActivity(intent);
         });
         holder.itemView.setOnTouchListener(new OnTapListener(holder));
     }

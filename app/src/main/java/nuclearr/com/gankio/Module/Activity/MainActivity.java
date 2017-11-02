@@ -32,7 +32,6 @@ public final class MainActivity extends BaseActivity {
     private final static Map<Integer, List<String>> BOTTOM_NAV_MAP = new ArrayMap<>();
     private final static String TAG = "MainActivity";
 
-
     static {
         BOTTOM_NAV_MAP.put(0, Arrays.asList("Daily", "Android", "iOS", "Frontend", "Extend", "Video", "Recommend"));
         BOTTOM_NAV_MAP.put(1, Arrays.asList("wow", "apps", "imrich", "funny", "android", "diediedie", "thinking", "iOS", "teamblog"));

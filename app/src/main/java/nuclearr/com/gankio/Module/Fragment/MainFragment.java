@@ -3,14 +3,13 @@ package nuclearr.com.gankio.Module.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.drakeet.multitype.MultiTypeAdapter;
 import nuclearr.com.gankio.Bean.GanDailyListItem;
 import nuclearr.com.gankio.Constant;
 import nuclearr.com.gankio.Module.Fragment.Base.RefreshListFragment;
-import nuclearr.com.gankio.Module.Fragment.ViewBinder.GanDailyViewBinder;
+import nuclearr.com.gankio.Module.ViewBinder.GanDailyViewBinder;
 import nuclearr.com.gankio.Network.Api.IGankService;
 import nuclearr.com.gankio.Network.ServiceFactory;
 import nuclearr.com.gankio.Network.Subscriber.HttpResultSub;
