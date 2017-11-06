@@ -6,16 +6,22 @@ import org.jetbrains.annotations.Contract;
  * Created by torri on 2017/10/17.
  */
 
-public final class JiandanItem {
+public final class JiandanItem implements IImageItem {
 
-    private String pictureUrl;
+    private String imageUrl;
 
     @Contract(pure = true)
-    public String getPictureUrl() {
-        return pictureUrl;
+    @Override
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String getThumbnailUrl() {
+        return getImageUrl().replace("large", "mw600");
     }
 }

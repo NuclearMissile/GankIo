@@ -6,13 +6,13 @@ import java.util.concurrent.CancellationException;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
-import nuclearr.com.gankio.Network.HttpResult;
+import nuclearr.com.gankio.Network.JsonResult;
 
 /**
  * Created by torri on 2017/10/23.
  */
 
-public abstract class HttpResultSub<T> implements SingleObserver<HttpResult<T>> {
+public abstract class HttpResultSub<T> implements SingleObserver<JsonResult<T>> {
 
     @Override
     public void onSubscribe(Disposable d) {
@@ -20,7 +20,7 @@ public abstract class HttpResultSub<T> implements SingleObserver<HttpResult<T>> 
     }
 
     @Override
-    public void onSuccess(@NotNull HttpResult<T> result) {
+    public void onSuccess(@NotNull JsonResult<T> result) {
         if (!result.error)
             _onSuccess(result.results);
         else

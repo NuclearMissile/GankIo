@@ -34,6 +34,7 @@
         <activity
             android:name=".Module.Activity.GanDailyDetailActivity"
             android:theme="@style/GanDailyDetailActivityTheme" />
+        <activity android:name=".Module.Activity.ImageActivity" />
     </application>
 
 </manifest>

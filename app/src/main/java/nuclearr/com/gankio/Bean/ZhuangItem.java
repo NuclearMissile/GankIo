@@ -4,10 +4,10 @@ package nuclearr.com.gankio.Bean;
  * Created by torri on 2017/10/17.
  */
 
-public final class ZhuangItem {
+public final class ZhuangItem implements IImageItem {
     private String title;
-    private String thumbnailURL;
-    private String pictureURL;
+    private String thumbnailUrl;
+    private String imageUrl;
 
     public String getTitle() {
         return title;
@@ -17,19 +17,21 @@ public final class ZhuangItem {
         this.title = title;
     }
 
-    public String getThumbnailURL() {
-        return thumbnailURL;
+    @Override
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 
-    public void setThumbnailURL(String thumbnailURL) {
-        this.thumbnailURL = thumbnailURL;
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
+    @Override
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -69,8 +69,6 @@ public final class ImageRequest {
         ImageRequest create() {
             if (imageView == null)
                 throw new IllegalArgumentException(TAG + ": imageView is null");
-            if (TextUtils.isEmpty(url))
-                throw new IllegalArgumentException(TAG + ": url is empty");
             return new ImageRequest(this);
         }
     }

@@ -35,10 +35,10 @@ public final class MainActivity extends BaseActivity {
     static {
         BOTTOM_NAV_MAP.put(0, Arrays.asList("Daily", "Android", "iOS", "Frontend", "Extend", "Video", "Recommend"));
         BOTTOM_NAV_MAP.put(1, Arrays.asList("wow", "apps", "imrich", "funny", "android", "diediedie", "thinking", "iOS", "teamblog"));
-        BOTTOM_NAV_MAP.put(2, Arrays.asList("Gank.io", "Jiandan.net", "Zhuangbi.info"));
+        BOTTOM_NAV_MAP.put(2, Arrays.asList("Gank.io", "Jiandan.net", "Zhuangbi.info", "Zhuangbi.info2"));
         BOTTOM_NAV_MAP.put(10, Arrays.asList("Daily", "Android", "iOS", "前端", "拓展资源", "休息视频", "瞎推荐"));
         BOTTOM_NAV_MAP.put(11, Arrays.asList("wow", "apps", "imrich", "funny", "android", "diediedie", "thinking", "iOS", "teamblog"));
-        BOTTOM_NAV_MAP.put(12, Arrays.asList("Gank.io", "Jiandan.net", "Zhuangbi.info"));
+        BOTTOM_NAV_MAP.put(12, Arrays.asList("Gank.io", "Jiandan.net", "Zhuangbi.info", "Zhuangbi.info2"));
     }
 
     private final long MAX_DOUBLE_BACK_DURATION = 1500;

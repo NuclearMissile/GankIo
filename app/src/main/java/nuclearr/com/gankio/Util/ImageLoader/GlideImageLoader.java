@@ -9,12 +9,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
-import nuclearr.com.gankio.BaseApplication;
-import nuclearr.com.gankio.Util.NetworkUtil;
-import nuclearr.com.gankio.Util.SettingUtil;
-
 final class GlideImageLoader {
-
+/*
     void loadImage(ImageRequest request) {
         Context context = BaseApplication.getInstance();
         if (NetworkUtil.isWifiConnected(context)) {
@@ -26,27 +22,27 @@ final class GlideImageLoader {
         } else {
             loadCache(context, request);
         }
-    }
+    }*/
 
-    private void loadCache(Context context, ImageRequest request) {
+    void loadCache(Context context, ImageRequest request) {
         GlideApp.with(context)
                 .load(request.getUrl())
                 .placeholder(request.getPlaceHolder())
                 .error(request.getError())
                 .onlyRetrieveFromCache(true)
                 .priority(Priority.IMMEDIATE)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .transition(DrawableTransitionOptions.withCrossFade(300))
                 .into(request.getImageView());
     }
 
     // todo fix image load order problem
-    private void loadNet(Context context, ImageRequest request) {
+    void loadNet(Context context, ImageRequest request) {
         GlideApp.with(context)
                 .load(request.getUrl())
                 .placeholder(request.getPlaceHolder())
                 .error(request.getError())
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .transition(DrawableTransitionOptions.withCrossFade(300))
                 .priority(Priority.IMMEDIATE)
                 .into(new SimpleTarget<Drawable>() {
@@ -57,7 +53,7 @@ final class GlideImageLoader {
                 });
     }
 
-/*    private void loadNet(Context context, ImageRequest request) {
+    void loadNet2(Context context, ImageRequest request) {
         GlideApp.with(context)
                 .load(request.getUrl())
                 .placeholder(request.getPlaceHolder())
@@ -66,6 +62,6 @@ final class GlideImageLoader {
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .transition(DrawableTransitionOptions.withCrossFade(300))
                 .into(request.getImageView());
-    }*/
+    }
 
 }

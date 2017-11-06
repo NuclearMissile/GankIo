@@ -2,11 +2,13 @@ package nuclearr.com.gankio.Bean;
 
 import org.jsoup.Jsoup;
 
+import nuclearr.com.gankio.Constant;
+
 /**
  * Created by torri on 2017/10/26.
  */
 
-public final class GanDailyListItem {
+public final class GanDailyListItem implements IImageItem {
     private String _id;
     private String content;
     private String created_at;
@@ -15,8 +17,14 @@ public final class GanDailyListItem {
     private String title;
     private String updated_at;
 
+    @Override
     public String getImageUrl() {
         return Jsoup.parse(content).getElementsByTag("img").first().attr("src");
+    }
+
+    @Override
+    public String getThumbnailUrl() {
+        return getImageUrl() + Constant.IMAGE_QUALITY_REQ_STRING;
     }
 
     public String getPublishDate() {
