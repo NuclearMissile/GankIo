@@ -21,8 +21,8 @@ import java.util.Map;
 
 import nuclearr.com.gankio.Module.Fragment.Base.BaseFragment;
 import nuclearr.com.gankio.Module.Fragment.Base.RefreshListFragment;
-import nuclearr.com.gankio.Module.Fragment.ImageFragment;
 import nuclearr.com.gankio.Module.Fragment.HomeFragment;
+import nuclearr.com.gankio.Module.Fragment.ImageFragment;
 import nuclearr.com.gankio.Module.Fragment.XianFragment;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.LogUtil;
@@ -140,8 +140,11 @@ public final class MainActivity extends BaseActivity {
                     case 1:
                         mCurrentFragment = new XianFragment();
                         break;
-                    default:
+                    case 2:
                         mCurrentFragment = new ImageFragment();
+                        break;
+                    default:
+                        mCurrentFragment = new HomeFragment();
                         break;
                 }
                 Bundle bundle = new Bundle();

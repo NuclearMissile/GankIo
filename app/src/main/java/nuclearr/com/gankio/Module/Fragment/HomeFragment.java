@@ -34,8 +34,9 @@ public final class HomeFragment extends RefreshListFragment {
 
     @Override
     public void loadData(final int pageIndex) {
-        IGankService service = ServiceFactory.getInstance().createService(IGankService.class);
         String arg = getArguments().getString("category");
+        IGankService service = ServiceFactory.getInstance()
+                .createService(IGankService.class);
         if (arg.equals("Daily")) {
             service.getRecentlyList(pageIndex, Constant.PAGE_SIZE)
                     .compose(this.bindToLifecycle())
