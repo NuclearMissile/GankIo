@@ -13,9 +13,7 @@ public interface IListView {
 
     void onException(Exception e);
 
-    void showLoading();
-
     void showMessage(String msg);
 
-    void showContent();
+    void clearData();
 }

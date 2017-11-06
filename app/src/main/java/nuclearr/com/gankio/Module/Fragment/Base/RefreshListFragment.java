@@ -1,5 +1,6 @@
 package nuclearr.com.gankio.Module.Fragment.Base;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -26,13 +27,13 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loadData(mCurrentPageIndex);
         setUserVisibleHint(true);
+        loadData(mCurrentPageIndex);
     }
 
     @Override
     protected void setUpView() {
-        mItems = new LinkedList();
+        mItems = new ArrayList();
         mRecyclerView = $(R.id.recycler_view);
         mRefreshLayout = $(R.id.refresh_layout);
         mLayoutManager = setLayoutManager();
@@ -44,7 +45,7 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
         mCurrentPageIndex = getInitPageIndex();
 
         mRefreshLayout.setOnRefreshListener(this::refreshData);
-
+        mRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -91,7 +92,6 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
             showMessage("No more data.");
         }
         mAdapter.notifyDataSetChanged();
-        mRefreshLayout.setRefreshing(false);
     }
 
     protected int getInitPageIndex() {
@@ -102,13 +102,15 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
     public abstract void loadData(int pageIndex);
 
     @Override
-    public void refreshData() {
-        loadData(mCurrentPageIndex);
+    public final void loadMore() {
+        loadData(++mCurrentPageIndex);
     }
 
     @Override
-    public final void loadMore() {
-        loadData(++mCurrentPageIndex);
+    public final void clearData() {
+        mItems.clear();
+        mAdapter.notifyDataSetChanged();
+        mCurrentPageIndex = getInitPageIndex();
     }
 
     @Override
@@ -118,13 +120,9 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void showContent() {
-
+    public void refreshData() {
+        loadData(mCurrentPageIndex);
+        mRefreshLayout.setRefreshing(false);
     }
 
     @Override

@@ -21,8 +21,8 @@ import java.util.Map;
 
 import nuclearr.com.gankio.Module.Fragment.Base.BaseFragment;
 import nuclearr.com.gankio.Module.Fragment.Base.RefreshListFragment;
-import nuclearr.com.gankio.Module.Fragment.GanItemFragment;
-import nuclearr.com.gankio.Module.Fragment.MainFragment;
+import nuclearr.com.gankio.Module.Fragment.ImageFragment;
+import nuclearr.com.gankio.Module.Fragment.HomeFragment;
 import nuclearr.com.gankio.Module.Fragment.XianFragment;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.LogUtil;
@@ -135,13 +135,13 @@ public final class MainActivity extends BaseActivity {
             try {
                 switch (bottomNavIndex) {
                     case 0:
-                        mCurrentFragment = position == 0 ? new MainFragment() : new GanItemFragment();
+                        mCurrentFragment = new HomeFragment();
                         break;
                     case 1:
                         mCurrentFragment = new XianFragment();
                         break;
                     default:
-                        mCurrentFragment = new MainFragment();
+                        mCurrentFragment = new ImageFragment();
                         break;
                 }
                 Bundle bundle = new Bundle();

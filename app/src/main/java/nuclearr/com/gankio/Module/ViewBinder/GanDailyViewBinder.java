@@ -56,7 +56,7 @@ public final class GanDailyViewBinder extends ItemViewBinder<GanDailyListItem, G
         ViewHolder holder;
 
         OnTapListener(ViewHolder viewHolder) {
-            holder = viewHolder;
+            this.holder = viewHolder;
         }
 
         @Override
