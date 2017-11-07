@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 
 import me.drakeet.multitype.MultiTypeAdapter;
 import nuclearr.com.gankio.R;
@@ -115,6 +116,8 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
 
     @Override
     public void onException(Exception e) {
+        if (e instanceof CancellationException)
+            return;
         showMessage(e.getMessage());
         e.printStackTrace();
     }
@@ -127,6 +130,7 @@ public abstract class RefreshListFragment extends BaseFragment implements IListV
 
     @Override
     public void showMessage(String msg) {
-        ToastUtil.showToast(msg, Toast.LENGTH_SHORT);
+        ToastUtil.cancelToast();
+        ToastUtil.showToast(msg, Toast.LENGTH_LONG);
     }
 }

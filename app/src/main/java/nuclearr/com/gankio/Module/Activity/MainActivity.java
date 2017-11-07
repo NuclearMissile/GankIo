@@ -28,7 +28,7 @@ import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.LogUtil;
 import nuclearr.com.gankio.Util.ToastUtil;
 
-public class MainActivity extends BaseActivity {
+public final class MainActivity extends BaseActivity {
     private final static Map<Integer, List<String>> BOTTOM_NAV_MAP = new ArrayMap<>();
     private final static String TAG = "MainActivity";
 

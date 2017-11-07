@@ -26,7 +26,7 @@ import nuclearr.com.gankio.Util.ToastUtil;
  * Created by torri on 2017/11/2.
  */
 
-public class ImageFragment extends RefreshListFragment {
+public final class ImageFragment extends RefreshListFragment {
 
     private int mJiandanPageCount = -1;
 
@@ -68,7 +68,7 @@ public class ImageFragment extends RefreshListFragment {
                             .compose(bindToLifecycle())
                             .subscribe((integer, throwable) -> {
                                 if (throwable == null || throwable instanceof CancellationException)
-                                    mJiandanPageCount = integer;
+                                    mJiandanPageCount = integer == null ? -1 : integer;
                                 else
                                     ToastUtil.showToast(arg + throwable.getMessage(), Toast.LENGTH_LONG);
                             });

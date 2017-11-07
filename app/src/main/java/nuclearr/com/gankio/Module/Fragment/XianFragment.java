@@ -12,7 +12,7 @@ import nuclearr.com.gankio.Module.ViewBinder.XianViewBinder;
 import nuclearr.com.gankio.Network.Api.XianService;
 import nuclearr.com.gankio.Util.RxUtil;
 
-public class XianFragment extends RefreshListFragment {
+public final class XianFragment extends RefreshListFragment {
     @Override
     protected void regAdapter(MultiTypeAdapter adapter) {
         adapter.register(XianItem.class, new XianViewBinder());

@@ -1,5 +1,6 @@
 package nuclearr.com.gankio.Module.ViewBinder;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 
 import me.drakeet.multitype.ItemViewBinder;
 import nuclearr.com.gankio.Bean.IImageItem;
+import nuclearr.com.gankio.Bean.ZhuangItem;
+import nuclearr.com.gankio.Module.Activity.ImageActivity;
+import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.ImageLoader.ImageLoader;
 
@@ -28,7 +32,12 @@ public final class ImageViewBinder extends ItemViewBinder<IImageItem, ImageViewB
         holder.setIsRecyclable(false);
         ImageLoader.showImage2(holder.imageView, item.getThumbnailUrl());
         holder.imageView.setOnClickListener(v -> {
-
+            Intent intent = new Intent(MainActivity.getInstance(), ImageActivity.class);
+            intent.putExtra("url", item.getImageUrl());
+            if (item instanceof ZhuangItem) {
+                intent.putExtra("title", ((ZhuangItem)item).getTitle());
+            }
+            MainActivity.getInstance().startActivity(intent);
         });
     }
 

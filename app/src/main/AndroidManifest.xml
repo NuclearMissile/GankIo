@@ -31,10 +31,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Module.Activity.GanDailyDetailActivity"
             android:theme="@style/GanDailyDetailActivityTheme" />
-        <activity android:name=".Module.Activity.ImageActivity" />
+
+        <activity android:name=".Module.Activity.ImageActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
