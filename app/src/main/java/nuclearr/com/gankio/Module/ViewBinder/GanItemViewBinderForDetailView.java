@@ -13,6 +13,7 @@ import nuclearr.com.gankio.Module.Activity.BaseActivity;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.CustomTabsUtil;
 import nuclearr.com.gankio.Util.DateUtil;
+import nuclearr.com.gankio.Util.ShareUtil;
 
 public final class GanItemViewBinderForDetailView extends ItemViewBinder<GanItem, GanItemViewBinderForDetailView.ViewHolder> {
     @NonNull
@@ -31,6 +32,10 @@ public final class GanItemViewBinderForDetailView extends ItemViewBinder<GanItem
         holder.who.setText(item.getWho());
         holder.itemView.setOnClickListener(v -> {
             CustomTabsUtil.openUrl(BaseActivity.getInstance(), item.getUrl());
+        });
+        holder.itemView.setOnLongClickListener(v -> {
+            ShareUtil.shareText(item.getUrl());
+            return true;
         });
     }
 

@@ -22,19 +22,18 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public final class OkHttpProvider {
-
+final class OkHttpProvider {
     private final static long DEFAULT_CONNECT_TIMEOUT = 5;
     private final static long DEFAULT_WRITE_TIMEOUT = 5;
     private final static long DEFAULT_READ_TIMEOUT = 5;
     private final static String UA = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
 
-    public static OkHttpClient getCacheOkHttpClient() {
+    static OkHttpClient getOnlyCacheOkHttpClient() {
         return getOkHttpClient(new CacheControlInterceptor());
     }
 
-    public static OkHttpClient getOkHttpClient() {
+    static OkHttpClient getOkHttpClient() {
         return getOkHttpClient(new FromNetWorkControlInterceptor());
     }
 

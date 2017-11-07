@@ -20,12 +20,14 @@ public class ZhuangService extends BaseJsoupService {
         return getDocumentObservable(requestUrl).map(document -> {
             List<ZhuangItem> list = new LinkedList<>();
             document.body().getElementsByClass("thumbnail").forEach(element -> {
-                ZhuangItem item = new ZhuangItem();
-                item.setImageUrl(element.attr("src"));
-                item.setThumbnailUrl(element.attr("src"));
-                item.setTitle(element.attr("title"));
-                if (!item.getImageUrl().isEmpty())
+                String thumb = element.attr("src");
+                if (!thumb.isEmpty()) {
+                    ZhuangItem item = new ZhuangItem();
+                    item.setImageUrl(thumb.substring(0, thumb.indexOf("?imageMogr2")));
+                    item.setThumbnailUrl(thumb);
+                    item.setTitle(element.attr("title"));
                     list.add(item);
+                }
             });
             return list;
         });

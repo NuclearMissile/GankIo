@@ -45,23 +45,6 @@ final class GlideImageLoader {
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .transition(DrawableTransitionOptions.withCrossFade(300))
                 .priority(Priority.IMMEDIATE)
-                .into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
-                        request.getImageView().setImageDrawable(resource);
-                    }
-                });
-    }
-
-    void loadNet2(Context context, ImageRequest request) {
-        GlideApp.with(context)
-                .load(request.getUrl())
-                .placeholder(request.getPlaceHolder())
-                .error(request.getError())
-                .priority(Priority.IMMEDIATE)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .transition(DrawableTransitionOptions.withCrossFade(300))
                 .into(request.getImageView());
     }
-
 }

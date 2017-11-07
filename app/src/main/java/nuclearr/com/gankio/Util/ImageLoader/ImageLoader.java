@@ -25,13 +25,4 @@ public final class ImageLoader {
                 .error(R.color.md_red_400)
                 .create());
     }
-
-    public static void showImage2(ImageView imageView, String url) {
-        getFactory().loadNet2(BaseApplication.getInstance(), new ImageRequest.Builder()
-                .url(url)
-                .imgView(imageView)
-                .placeHolder(R.drawable.default_img)
-                .error(R.color.md_red_400)
-                .create());
-    }
 }

@@ -49,7 +49,7 @@ public abstract class DownloadSub implements SingleObserver<ResponseBody> {
         handler.post(() -> onCompleted(mFile));
     }
 
-    public boolean writeResponseBodyToDisk(ResponseBody responseBody) {
+    private boolean writeResponseBodyToDisk(ResponseBody responseBody) {
         try (InputStream inputStream = responseBody.byteStream();
              OutputStream outputStream = new FileOutputStream(mFile)) {
             byte[] buffer = new byte[4096];

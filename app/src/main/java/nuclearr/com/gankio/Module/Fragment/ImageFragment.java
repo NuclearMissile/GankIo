@@ -27,9 +27,6 @@ import nuclearr.com.gankio.Util.ToastUtil;
  */
 
 public final class ImageFragment extends RefreshListFragment {
-
-    private int mJiandanPageCount = -1;
-
     @Override
     protected void regAdapter(MultiTypeAdapter adapter) {
         adapter.register(IImageItem.class, new ImageViewBinder());
@@ -62,18 +59,8 @@ public final class ImageFragment extends RefreshListFragment {
                         });
                 break;
             case "Jiandan.net":
-                if (mJiandanPageCount == -1) {
-                    JiandanService.getPageCount()
-                            .compose(RxUtil.defaultSchedulers_single())
-                            .compose(bindToLifecycle())
-                            .subscribe((integer, throwable) -> {
-                                if (throwable == null || throwable instanceof CancellationException)
-                                    mJiandanPageCount = integer == null ? -1 : integer;
-                                else
-                                    ToastUtil.showToast(arg + throwable.getMessage(), Toast.LENGTH_LONG);
-                            });
-                }
-                JiandanService.getItems(mJiandanPageCount - pageIndex + 1)
+                JiandanService.getPageCount()
+                        .flatMap(integer -> JiandanService.getItems(integer - pageIndex + 1))
                         .compose(RxUtil.defaultSchedulers_single())
                         .compose(bindToLifecycle())
                         .subscribe((jiandanItems, throwable) -> {

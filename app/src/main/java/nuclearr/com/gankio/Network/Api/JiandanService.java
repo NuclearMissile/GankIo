@@ -13,11 +13,10 @@ public class JiandanService extends BaseJsoupService {
     private static final String BASE_URL = "http://jandan.net/ooxx/";
 
     public static Single<Integer> getPageCount() {
-        return getDocumentObservable(BASE_URL)
-                .map(document -> {
-                    String page = document.getElementsByClass("current-comment-page").text();
-                    return Integer.parseInt(page.substring(page.indexOf('[') + 1, page.indexOf(']')));
-                });
+        return getDocumentObservable(BASE_URL).map(document -> {
+            String page = document.getElementsByClass("current-comment-page").text();
+            return Integer.parseInt(page.substring(page.indexOf('[') + 1, page.indexOf(']')));
+        });
     }
 
     public static Single<List<JiandanItem>> getItems(int pageIndex) {

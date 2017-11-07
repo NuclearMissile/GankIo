@@ -1,8 +1,8 @@
 package nuclearr.com.gankio.Module.Activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +13,7 @@ import java.util.LinkedList;
 
 public abstract class BaseActivity extends RxAppCompatActivity {
     private static final String TAG = "BaseActivity";
+    protected static Dialog mDialog;
     private static BaseActivity instance;
     private static LinkedList<Activity> activities = new LinkedList<>();
 
@@ -44,6 +45,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         addActivity(this);
         setContentView(setContentResID());
         instance = this;
+        mDialog = new Dialog(this);
+        mDialog.setCancelable(false);
+        mDialog.setCanceledOnTouchOutside(false);
     }
 
     protected abstract int setContentResID();
@@ -51,15 +55,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     @SuppressWarnings("unchecked")
     protected <T extends View> T $(int resID) {
         return (T) super.findViewById(resID);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 1:
-                break;
-        }
     }
 
     @Override

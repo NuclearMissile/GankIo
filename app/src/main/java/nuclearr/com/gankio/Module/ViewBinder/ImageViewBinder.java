@@ -16,10 +16,6 @@ import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.ImageLoader.ImageLoader;
 
-/**
- * Created by torri on 2017/11/6.
- */
-
 public final class ImageViewBinder extends ItemViewBinder<IImageItem, ImageViewBinder.ViewHolder> {
     @NonNull
     @Override
@@ -29,8 +25,7 @@ public final class ImageViewBinder extends ItemViewBinder<IImageItem, ImageViewB
 
     @Override
     protected void onBindViewHolder(@NonNull ImageViewBinder.ViewHolder holder, @NonNull IImageItem item) {
-        holder.setIsRecyclable(false);
-        ImageLoader.showImage2(holder.imageView, item.getThumbnailUrl());
+        ImageLoader.showImage(holder.imageView, item.getThumbnailUrl());
         holder.imageView.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.getInstance(), ImageActivity.class);
             intent.putExtra("url", item.getImageUrl());

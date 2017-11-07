@@ -11,10 +11,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import me.drakeet.multitype.ItemViewBinder;
 import nuclearr.com.gankio.Bean.XianItem;
 import nuclearr.com.gankio.Module.Activity.BaseActivity;
-import nuclearr.com.gankio.Module.Activity.MainActivity;
 import nuclearr.com.gankio.R;
 import nuclearr.com.gankio.Util.CustomTabsUtil;
 import nuclearr.com.gankio.Util.ImageLoader.ImageLoader;
+import nuclearr.com.gankio.Util.ShareUtil;
 
 public final class XianViewBinder extends ItemViewBinder<XianItem, XianViewBinder.ViewHolder> {
     @NonNull
@@ -32,6 +32,11 @@ public final class XianViewBinder extends ItemViewBinder<XianItem, XianViewBinde
 
         holder.itemView.setOnClickListener(v -> {
             CustomTabsUtil.openUrl(BaseActivity.getInstance(), item.getUrl());
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            ShareUtil.shareText(item.getUrl());
+            return true;
         });
     }
 
