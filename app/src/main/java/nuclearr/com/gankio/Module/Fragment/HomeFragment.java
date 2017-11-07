@@ -19,7 +19,7 @@ import nuclearr.com.gankio.Network.Subscriber.HttpResultSub;
 import nuclearr.com.gankio.Util.RxUtil;
 import nuclearr.com.gankio.Util.ToastUtil;
 
-public final class HomeFragment extends RefreshListFragment {
+public class HomeFragment extends RefreshListFragment {
 
     @Override
     protected void regAdapter(MultiTypeAdapter adapter) {
