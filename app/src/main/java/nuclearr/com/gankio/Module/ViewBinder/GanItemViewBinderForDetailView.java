@@ -24,7 +24,7 @@ public final class GanItemViewBinderForDetailView extends ItemViewBinder<GanItem
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, @NonNull GanItem item) {
-        holder.title.setText(item.getDesc());
+        holder.title.setText(item.getDesc().replace(" ", ""));
         String publishTime = item.getPublishedAt();
         publishTime = publishTime.substring(0, publishTime.indexOf("."));
         publishTime = publishTime.replace("T", " ");

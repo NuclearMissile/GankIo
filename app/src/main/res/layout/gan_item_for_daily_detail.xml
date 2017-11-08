@@ -13,7 +13,8 @@
             android:id="@+id/gan_item_for_daily_detail_title"
             style="@style/ListItem.Title"
             android:layout_marginBottom="10dp"
-            android:maxLines="1"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:text="Test" />
 
         <TextView
