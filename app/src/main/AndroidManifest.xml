@@ -37,7 +37,9 @@
         <activity
             android:name=".Module.Activity.ImageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Module.Activity.AboutActivity"></activity>
+        <activity
+            android:name=".Module.Activity.AboutActivity"
+            android:theme="@style/AppTheme.About"></activity>
     </application>
 
 </manifest>

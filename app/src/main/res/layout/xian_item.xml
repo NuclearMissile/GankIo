@@ -25,8 +25,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/xian_item_avatar"
                 android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_launcher_background" />
+                android:layout_height="32dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

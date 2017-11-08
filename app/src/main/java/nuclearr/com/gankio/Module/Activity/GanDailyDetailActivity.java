@@ -64,7 +64,6 @@ public final class GanDailyDetailActivity extends BaseActivity {
                 .subscribe(new HttpResultSub<GanDailyDetailItem>() {
                     @Override
                     public void _onError(Throwable throwable) {
-                        // todo
                         ToastUtil.showToast(throwable.getMessage(), Toast.LENGTH_LONG);
                         throwable.printStackTrace();
                     }

@@ -45,5 +45,11 @@
         <item name="android:textSize">@dimen/item_time</item>
     </style>
 
+    <style name="AppTheme.About" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@android:color/black</item>
+    </style>
+
 
 </resources>

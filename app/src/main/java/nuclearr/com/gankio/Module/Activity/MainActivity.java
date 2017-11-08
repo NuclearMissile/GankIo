@@ -1,5 +1,6 @@
 package nuclearr.com.gankio.Module.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -60,11 +61,13 @@ public final class MainActivity extends BaseActivity {
         return true;
     }
 
-    // todo add setting activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_settings)
+        if (item.getItemId() == R.id.action_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
             return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

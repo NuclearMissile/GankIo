@@ -36,7 +36,6 @@ final class GlideImageLoader {
                 .into(request.getImageView());
     }
 
-    // todo fix image load problem
     void loadNet(Context context, ImageRequest request) {
         GlideApp.with(context)
                 .load(request.getUrl())
