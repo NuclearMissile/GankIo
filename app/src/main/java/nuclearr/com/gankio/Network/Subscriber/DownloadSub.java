@@ -30,12 +30,12 @@ public abstract class DownloadSub implements SingleObserver<ResponseBody> {
 
     public DownloadSub(@NotNull String fileName) {
         mSaveFilePath = FileUtil.getCacheDir(BaseApplication.getInstance()).getAbsolutePath();
-        mFile = new File(mSaveFilePath + File.separator + fileName);
+        mFile = new File(mSaveFilePath, fileName);
     }
 
     public DownloadSub(@NotNull String filePath, @NotNull String fileName) {
         mSaveFilePath = filePath;
-        mFile = new File(mSaveFilePath + File.separator + fileName);
+        mFile = new File(mSaveFilePath, fileName);
     }
 
     @Override
@@ -52,7 +52,7 @@ public abstract class DownloadSub implements SingleObserver<ResponseBody> {
     private boolean writeResponseBodyToDisk(ResponseBody responseBody) {
         try (InputStream inputStream = responseBody.byteStream();
              OutputStream outputStream = new FileOutputStream(mFile)) {
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[8192];
             fileSize = responseBody.contentLength();
             while (true) {
                 int readSize = inputStream.read(buffer);

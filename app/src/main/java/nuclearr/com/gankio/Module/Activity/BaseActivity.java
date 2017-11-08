@@ -1,7 +1,6 @@
 package nuclearr.com.gankio.Module.Activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -13,7 +12,6 @@ import java.util.LinkedList;
 
 public abstract class BaseActivity extends RxAppCompatActivity {
     private static final String TAG = "BaseActivity";
-    protected static Dialog mDialog;
     private static BaseActivity instance;
     private static LinkedList<Activity> activities = new LinkedList<>();
 
@@ -45,9 +43,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         addActivity(this);
         setContentView(setContentResID());
         instance = this;
-        mDialog = new Dialog(this);
-        mDialog.setCancelable(false);
-        mDialog.setCanceledOnTouchOutside(false);
     }
 
     protected abstract int setContentResID();

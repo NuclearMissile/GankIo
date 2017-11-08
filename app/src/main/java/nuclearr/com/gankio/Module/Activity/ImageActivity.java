@@ -1,6 +1,7 @@
 package nuclearr.com.gankio.Module.Activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
+import java.util.function.Consumer;
 
 import nuclearr.com.gankio.Network.Api.IDefaultService;
 import nuclearr.com.gankio.Network.ServiceFactory;
@@ -30,6 +32,7 @@ import nuclearr.com.gankio.Util.ToastUtil;
 public final class ImageActivity extends BaseActivity {
     private String mUrl;
     private File mFile;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected int setContentResID() {
@@ -46,56 +49,29 @@ public final class ImageActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.image_download:
-                if (ContextCompat.checkSelfPermission(ImageActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                    ActivityCompat.requestPermissions(ImageActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                else
-                    downLoad();
+                if (!getStoragePermission(1))
+                    return false;
+                downLoad(null);
                 break;
             case R.id.image_share:
-                if (mFile != null)
-                    ShareUtil.shareImage(mFile);
-                else
-                    downloadAndShare();
+                if (!getStoragePermission(2))
+                    return false;
+                downLoad(ShareUtil::shareImage);
                 break;
             default:
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void downloadAndShare() {
-        if (mFile != null)
+    private void downLoad(Consumer<File> consumer) {
+        if (mFile != null && mFile.exists()) {
+            if (consumer != null)
+                consumer.accept(mFile);
+            else
+                ToastUtil.showToast("Download success.", Toast.LENGTH_SHORT);
             return;
-        mDialog.show();
-        ServiceFactory.getInstance()
-                .createService(IDefaultService.class)
-                .download(mUrl)
-                .compose(RxUtil.all_io_single())
-                .compose(bindToLifecycle())
-                .subscribe(new DownloadSub(FileUtil.getFileName(mUrl)) {
-                    @Override
-                    public void onProgress(double progress, long downloadedBytes, long totalBytes) {
-
-                    }
-
-                    @Override
-                    public void onCompleted(File file) {
-                        mDialog.dismiss();
-                        ShareUtil.shareImage(file);
-                    }
-
-                    @Override
-                    protected void onFailed(Throwable e) {
-                        mDialog.dismiss();
-                        e.printStackTrace();
-                        ToastUtil.showToast(e.getMessage(), Toast.LENGTH_LONG);
-                    }
-                });
-    }
-
-    private void downLoad() {
-        if (mFile != null)
-            return;
-        mDialog.show();
+        }
+        mProgressDialog.show();
         ServiceFactory.getInstance()
                 .createService(IDefaultService.class)
                 .download(mUrl)
@@ -104,21 +80,24 @@ public final class ImageActivity extends BaseActivity {
                 .subscribe(new DownloadSub(FileUtil.getSaveImagePath(this), FileUtil.getFileName(mUrl)) {
                     @Override
                     public void onProgress(double progress, long downloadedBytes, long totalBytes) {
-
+                        mProgressDialog.setProgress((int) (progress * 100));
                     }
 
                     @Override
                     public void onCompleted(File file) {
-                        mDialog.dismiss();
                         mFile = file;
-                        ToastUtil.showToast("Download success.", Toast.LENGTH_SHORT);
+                        if (consumer != null)
+                            consumer.accept(file);
+                        else
+                            ToastUtil.showToast("Download success.", Toast.LENGTH_SHORT);
+                        mProgressDialog.dismiss();
                     }
 
                     @Override
                     protected void onFailed(Throwable e) {
-                        mDialog.dismiss();
                         e.printStackTrace();
                         ToastUtil.showToast(e.getMessage(), Toast.LENGTH_LONG);
+                        mProgressDialog.dismiss();
                     }
                 });
     }
@@ -128,26 +107,48 @@ public final class ImageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Toolbar toolbar = $(R.id.image_view_toolbar);
         PhotoView photoView = $(R.id.photo_view);
+        mProgressDialog = new ProgressDialog(this);
+        getStoragePermission(0);
 
         Intent intent = getIntent();
         mUrl = intent.getStringExtra("url");
         if (intent.getStringExtra("title") != null)
             toolbar.setTitle(intent.getStringExtra("title"));
-        photoView.layout(0, 0, 0, 0);
         ImageLoader.showImage(photoView, mUrl);
         setSupportActionBar(toolbar);
+        File file = new File(FileUtil.getSaveImagePath(this), FileUtil.getFileName(mUrl));
+        if (file.exists())
+            mFile = file;
+
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setTitle("Downloading...");
+        mProgressDialog.setMax(100);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+            ToastUtil.showToast("Permission denied.", Toast.LENGTH_SHORT);
+            return;
+        }
         switch (requestCode) {
             case 1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    downLoad();
-                else
-                    ToastUtil.showToast("Permission denied.", Toast.LENGTH_SHORT);
+                downLoad(null);
+                break;
+            case 2:
+                downLoad(ShareUtil::shareImage);
+                break;
+            default:
                 break;
         }
+    }
+
+    private boolean getStoragePermission(int requestCode) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 }
